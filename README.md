@@ -6,6 +6,12 @@ This is the official python version of the Behavior3 library, originally written
 
 NOTE: this version still lacks specific documentation, but almost everything you need can be dig from the javascript-version.
 
+## Installation
+
+Install from GitHub with:
+
+    pip install git+https://github.com/behavior3/behavior3py.git
+
 
 ## Main features
 
