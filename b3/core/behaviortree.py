@@ -32,7 +32,8 @@ class BehaviorTree(object):
             else:
                 raise AttributeError('BehaviorTree.load: Invalid node name "%s"'%spec['name'])
 
-            node = cls()
+            params = spec['properties']
+            node = cls(**params)
             node.id = spec['id'] or node.id
             node.title = spec['title'] or node.title
             node.description = spec['description'] or node.description
