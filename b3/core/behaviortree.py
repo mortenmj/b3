@@ -113,6 +113,10 @@ class BehaviorTree(object):
         tick.tree = self
         tick.debug = self.debug
 
+        self._execute(tick)
+
+
+    def _execute(self, tick):
         # Tick node
         state = self.root._execute(tick)
 
