@@ -60,7 +60,8 @@ class Tick(object):
 
         :param node: a node instance.
         '''
-        self._open_nodes.pop()
+        if self._open_nodes:
+            self._open_nodes.pop()
 
     def _exit_node(self, node):
         '''Called when exiting a node (called by BaseNode).
