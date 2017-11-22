@@ -5,6 +5,7 @@ FAILURE   = 2
 RUNNING   = 3
 ERROR     = 4
 
+TREE      = 'tree'
 COMPOSITE = 'composite'
 DECORATOR = 'decorator'
 ACTION    = 'action'

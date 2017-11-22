@@ -5,6 +5,8 @@ import itertools
 __all__ = ['BehaviorTree']
 
 class BehaviorTree(object):
+    category = b3.TREE
+
     def __init__(self):
         self.id = str(uuid.uuid1())
         self.title = 'Behavior3'
