@@ -103,9 +103,7 @@ class BehaviorTree(object):
 
         return data
 
-
     def tick(self, target, blackboard):
-
         # Create the TICK object
         tick = b3.Tick()
         tick.target = target
@@ -113,10 +111,11 @@ class BehaviorTree(object):
         tick.tree = self
         tick.debug = self.debug
 
-        self._execute(tick)
-
+        return self._execute(tick)
 
     def _execute(self, tick):
+        blackboard = tick.blackboard
+
         # Tick node
         state = self.root._execute(tick)
 
@@ -137,3 +136,5 @@ class BehaviorTree(object):
         # Populate blackboard
         blackboard.set('open_nodes', curr_open_nodes, self.id)
         blackboard.set('node_count', tick._node_count, self.id)
+
+        return state
