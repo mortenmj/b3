@@ -1,4 +1,5 @@
 import b3
+import pydot as pd
 import uuid
 
 __all__ = ['BaseNode']
@@ -14,6 +15,7 @@ class BaseNode(object):
         self.description = self.description or ''
         self.parameters = {}
         self.properties = {}
+        self._graph_node = None
 
     def __str__(self):
         return '%s' % self.__class__.__name__
@@ -21,6 +23,24 @@ class BaseNode(object):
     @property
     def name(self):
         return self.__class__.__name__
+
+    @property
+    def graph_node(self):
+        if self._graph_node is None:
+            self._graph_node = pd.Node(
+                    self.id,
+                    label=str(self),
+                    shape='ellipse',
+                    style='filled',
+                    fillcolor='gray',
+                    fontsize=11,
+                    fontcolor='black')
+        return self._graph_node
+
+    def graph_edge(self, other):
+        return pd.Edge(
+                self.graph_node.get_name(),
+                other.graph_node.get_name())
 
     def _execute(self, tick):
         self._enter(tick)
@@ -46,6 +66,8 @@ class BaseNode(object):
         tick.blackboard.set('is_open', True, tick.tree.id, self.id)
         self.open(tick)
 
+        self.graph_node.set_fillcolor('green')
+
     def _tick(self, tick):
         tick._tick_node(self)
         return self.tick(tick)
@@ -54,6 +76,8 @@ class BaseNode(object):
         tick._close_node(self)
         tick.blackboard.set('is_open', False, tick.tree.id, self.id)
         self.close(tick)
+
+        self.graph_node.set_fillcolor('gray')
 
     def _exit(self, tick):
         tick._exit_node(self)
