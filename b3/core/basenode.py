@@ -15,6 +15,9 @@ class BaseNode(object):
         self.parameters = {}
         self.properties = {}
 
+    def __str__(self):
+        return '%s' % self.__class__.__name__
+
     @property
     def name(self):
         return self.__class__.__name__
