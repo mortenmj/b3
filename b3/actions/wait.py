@@ -8,6 +8,9 @@ class Wait(b3.Action):
         super(Wait, self).__init__()
         self.end_time = milliseconds/1000.
 
+    def __str__(self):
+        return 'Wait <%s s>' % self.end_time
+
     def open(self, tick):
         start_time = time.time()
         tick.blackboard.set('start_time', start_time, tick.tree.id, self.id)
