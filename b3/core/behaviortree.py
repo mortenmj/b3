@@ -15,6 +15,9 @@ class BehaviorTree(object):
         self.root = None
         self.debug = None
 
+    def __str__(self):
+        return 'BehaviorTree <%s>' % self.title
+
     def load(self, data, names=None):
         names = names or {}
         self.title = data['title'] or self.title
